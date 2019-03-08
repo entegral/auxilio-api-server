@@ -6,28 +6,23 @@ class UsersController < ApplicationController
   end
 
     def show
-    @user = User.find_by(uid: user_params[:uid])
+    @user = User.find_by!(uid: user_params[:uid])
     json_response(@user)
   end
 
   def create
-    @user = User.create(user_params)
+    @user = User.create!(user_params)
     json_response(@user)
   end
 
   def update
-    @user = User.find_by(uid: user_params[:uid])
+    @user = User.find_by!(uid: user_params[:uid])
     @user.update(user_params)
   end
 
   def destroy
-    @user = User.find_by(uid: user_params[:uid])
+    @user = User.find_by!(uid: user_params[:uid])
     @user.destroy
-  end
-
-  private
-  def json_response(object, status = :ok)
-    render json: object, status: status
   end
 
   def user_params
