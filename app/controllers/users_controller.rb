@@ -7,6 +7,7 @@ class UsersController < ApplicationController
 
     def show
     @user = User.find_by!(uid: user_params[:uid])
+    puts user_params[:uid]
     json_response(@user)
   end
 
@@ -30,6 +31,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.permit(:first_name, :last_name, :email, :uid, :first_year_enrolled, :first_year_worked)
+    params.permit(:first_name, :last_name, :email, :uid, :first_year_enrolled, :first_year_worked, :id)
   end
 end
