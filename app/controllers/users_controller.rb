@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   end
 
     def show
-    @user = User.find(params[:uid])
+    @user = User.find_by(uid: user_params[:uid])
     json_response(@user)
   end
 
@@ -16,12 +16,12 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:uid])
+    @user = User.find_by(uid: user_params[:uid])
     @user.update(user_params)
   end
 
   def destroy
-    @user = User.find(params[:uid])
+    @user = User.find_by(uid: user_params[:uid])
     @user.destroy
   end
 
