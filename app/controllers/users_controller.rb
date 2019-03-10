@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find_by!(uid: user_params[:uid])
     if @user.update!(user_params)
-      render status: 200, json: { message: "User updated successfully" }
+      render status: 200, json: @user
     end
   end
 
