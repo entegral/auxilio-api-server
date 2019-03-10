@@ -1,8 +1,12 @@
 class UsersController < ApplicationController
 
   def index
-    @users = User.all
-    json_response(@users)
+    if User.find_by!(uid: user_params[:uid])
+      @users = User.all
+      json_response(@users)
+    else
+      render json: { message: 'Authentication failed'}
+    end
   end
 
     def show
