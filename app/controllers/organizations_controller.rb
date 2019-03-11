@@ -46,7 +46,7 @@ class OrganizationsController < ApplicationController
     if User.find_by!(uid: api_params[:requester_uid])
       @organization = Organization.find_by!(uid: api_params[:uid])
       if @organization.destroy
-        render status: 200, json: { message: "User deleted sucessfully"}
+        render status: 200, json: { message: "Organization deleted sucessfully"}
       end
     else
       render json: { message: 'Authentication failed'}
