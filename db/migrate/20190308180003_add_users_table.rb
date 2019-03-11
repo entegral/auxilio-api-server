@@ -5,8 +5,7 @@ class AddUsersTable < ActiveRecord::Migration[5.2]
       t.column :first_name, :string
       t.column :last_name, :string
       t.column :email, :string
-      t.column :first_year_enrolled, :integer
-      t.column :first_year_worked, :integer
+      t.timestamps
     end
   end
 end
