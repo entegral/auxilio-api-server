@@ -31,9 +31,14 @@ class OrganizationsController < ApplicationController
   end
 
   def update
-    @organization = Organization.find_by!(uid: api_params[:uid])
-    if @organization.update!(api_params)
-      render status: 200, json: @user
+    @user = User.find_by!(uid: api_params[:requester_uid])
+    if @user
+      @organization = Organization.find_by!(uid: api_params[:uid])
+      if @organization.update!(api_params)
+        render status: 200, json: @user
+      end
+    else
+      render json: { message: 'Authentication failed'}
     end
   end
 
