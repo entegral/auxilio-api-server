@@ -4,12 +4,7 @@ class ActionsController < ApplicationController
 
     @user = User.find_by!(uid: user_params[:requester_uid]) 
     if @user
-      puts '*********************'
-      puts user_params[:org_name]
-      puts user_params[:org_uid]
-      puts user_params[:apiAction].class
-      puts user_params[:apiAction] == 'addNewOrgToUser'
-      puts '*********************'
+ 
       case user_params[:apiAction]
         when 'addExistingOrgToUser'
           @org = Organization.find_by!(uid: user_params[:org_uid])
@@ -33,13 +28,18 @@ class ActionsController < ApplicationController
           else
             render json: { message: 'Internal server error, org not removed'}
           end
+        when 'getPublicOrgs'
+          @orgs = Organization.all.limit(10)
+          puts @orgs
+          json_response(@orgs)
         else
           render json: { message: 'Unrecognized action provided' }
-        end
+      end
     else
       render json: { message: 'Authentication failed'}
     end
   end
+
 
   def user_params
     params.permit(:requester_uid, :org_uid, :org_name, :apiAction)
