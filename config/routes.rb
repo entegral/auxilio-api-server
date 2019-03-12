@@ -3,4 +3,6 @@ Rails.application.routes.draw do
   resources :users
 
   resources :organizations
+
+  post '/userActions', to: 'actions#index'
 end
