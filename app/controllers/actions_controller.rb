@@ -27,6 +27,12 @@ class ActionsController < ApplicationController
           else
             render json: { message: 'Internal server error, org not created'}
           end
+        when 'removeOrgFromUser'
+          if @user.organizations.delete(Organization.find_by!(:uid=> user_params[:org_uid]))
+            json_response(@user.organizations)
+          else
+            render json: { message: 'Internal server error, org not removed'}
+          end
         else
           render json: { message: 'Unrecognized action provided' }
         end
