@@ -32,6 +32,16 @@ class ActionsController < ApplicationController
           @orgs = Organization.all.limit(10)
           puts @orgs
           json_response(@orgs)
+        when 'updateUser'
+          @user = User.find_by!(uid: user_params[:requester_uid])
+          puts '*************'
+          puts 'user found:'
+          puts @user
+          puts '*************'
+          new_params = {:uid=> user_params[:requester_uid], :first_name => user_params[:first_name], :last_name => user_params[:last_name]}
+          if @user.update!(new_params)
+            json_response(@user)
+          end
         else
           render json: { message: 'Unrecognized action provided' }
       end
@@ -42,7 +52,7 @@ class ActionsController < ApplicationController
 
 
   def user_params
-    params.permit(:requester_uid, :org_uid, :org_name, :apiAction)
+    params.permit(:requester_uid, :org_uid, :org_name, :apiAction, :first_name, :last_name)
   end
 
 end
