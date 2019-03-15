@@ -14,6 +14,6 @@ It is worth noting that this project was created to offer basic persistence to a
 2. clone this repo and ```cd``` into it.
 3. Run ```docker-compose up```. Docker should start downloading the necessary images and start building your local image.
 4. Open a new terminal window or tab (in the same folder) and run ```docker-compose run web rake db:create db:migrate```
-5. The container should be setup to respond to api calls made to https://localhost:3000. Ensure the 'const link' in [auxilioServerApi.js](https://github.com/entegral/auxilio/blob/master/src/apis/auxilioServerApi.js) is pointing to this address.
+5. The container should be setup to respond to api calls made to http://localhost:3000. Ensure the 'const link' in [auxilioServerApi.js](https://github.com/entegral/auxilio/blob/master/src/apis/auxilioServerApi.js) is pointing to this address.
 6. This is an alpha build and this container SHOULD BE USED FOR DEVELOPMENT ONLY, NOT PRODUCTION. Do not store personally identifiable information on it.
 
