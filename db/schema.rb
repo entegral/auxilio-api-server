@@ -37,6 +37,8 @@ ActiveRecord::Schema.define(version: 2019_03_11_210037) do
   create_table "organizations", force: :cascade do |t|
     t.string "uid"
     t.string "name"
+    t.string "encrypted_password"
+    t.string "encrypted_password_iv"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

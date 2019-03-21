@@ -4,6 +4,8 @@ class AddTables < ActiveRecord::Migration[5.2]
     create_table :organizations do |t|
       t.column :uid, :string
       t.column :name, :string
+      t.column :encrypted_password, :string
+      t.column :encrypted_password_iv, :string
       t.timestamps
     end
 
