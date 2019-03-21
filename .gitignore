@@ -19,5 +19,6 @@
 
 .byebug_history
 
-# Ignore master key for decrypting credentials and more.
+# Ignore master key and env file for decrypting credentials and more.
 /config/master.key
+/config/local_env.yml
