@@ -54,6 +54,6 @@ class OrganizationsController < ApplicationController
   end
 
   def api_params
-    params.permit(:requester_uid, :name, :uid)
+    params.permit(:requester_uid, :name, :uid, :password)
   end
 end
