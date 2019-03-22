@@ -1,9 +1,11 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  host: db
-  username: postgres
-  password:
+# UNCOMMENT THESE 3 LINES TO BUILD DOCKER CONTAINER PROPERLY
+  # host: db
+  # username: postgres
+  # password:
+# UNCOMMENT THESE 3 LINES TO BUILD DOCKER CONTAINER PROPERLY
   pool: 5
 
 development:
