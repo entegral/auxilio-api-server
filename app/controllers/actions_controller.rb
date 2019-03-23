@@ -40,8 +40,7 @@ class ActionsController < ApplicationController
             render status: 500, json: { message: 'Internal server error, org not removed'}
           end
         when 'getPublicOrgs'
-          @orgs = Organization.all.where(encrypted_password: '').limit(10)
-          puts @orgs
+          @orgs = Organization.all.where(encrypted_password: nil).limit(10)
           json_response(@orgs)
         when 'updateUser'
           @user = User.find_by!(uid: user_params[:requester_uid])
