@@ -5,7 +5,7 @@ class UsersController < ApplicationController
       @users = User.all
       json_response(@users)
     else
-      render status: 401, json: { message: 'Authentication failed'}
+      render json: { message: 'Authentication failed', error: true}
     end
   end
 
@@ -30,7 +30,7 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find_by!(uid: user_params[:uid])
     if @user.destroy
-      render status: 200, json: { message: "User deleted sucessfully"}
+      render json: { message: "User deleted sucessfully", error: true}
     end
   end
 
