@@ -13,13 +13,13 @@ class ActionsController < ApplicationController
               @user.organizations << @org
               json_response(@user.organizations)
             else
-              render json: { message: 'Org password incorrect' }
+              render json: { message: 'Org password incorrect', error: true }
             end
           elsif @org
             @user.organizations << @org
             json_response(@user.organizations)
           else
-            render json: { message: 'Organization not found' }
+            render json: { message: 'Organization not found', error: true }
           end
         when 'addNewOrgToUser'
           if user_params[:org_password]
@@ -31,16 +31,16 @@ class ActionsController < ApplicationController
             @user.organizations << @org
             json_response(@user.organizations)
           else
-            render json: { message: 'Internal server error, org not created'}
+            render status: 500, json: { message: 'Internal server error, org not created'}
           end
         when 'removeOrgFromUser'
           if @user.organizations.delete(Organization.find_by!(:uid=> user_params[:org_uid]))
             json_response(@user.organizations)
           else
-            render json: { message: 'Internal server error, org not removed'}
+            render status: 500, json: { message: 'Internal server error, org not removed'}
           end
         when 'getPublicOrgs'
-          @orgs = Organization.all.where(encrypted_password: nil).limit(10)
+          @orgs = Organization.all.where(encrypted_password: '').limit(10)
           puts @orgs
           json_response(@orgs)
         when 'updateUser'
@@ -54,10 +54,10 @@ class ActionsController < ApplicationController
             json_response(@user)
           end
         else
-          render json: { message: 'Unrecognized action provided' }
+          render json: { message: 'Unrecognized action provided', error: true }
       end
     else
-      render json: { message: 'Authentication failed'}
+      render json: { message: 'Authentication failed', error: true}
     end
   end
 

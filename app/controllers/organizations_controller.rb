@@ -6,7 +6,7 @@ class OrganizationsController < ApplicationController
       @organizations = @user.organizations
       json_response(@organizations)
     else
-      render json: { message: 'Authentication failed'}
+      render status: 401, json: { message: 'Authentication failed'}
     end
   end
 
@@ -15,7 +15,7 @@ class OrganizationsController < ApplicationController
       @organization = Organization.find_by!(uid: api_params[:uid])
       json_response(@organization)
     else
-      render json: { message: 'Authentication failed'}
+      render status: 401, json: { message: 'Authentication failed'}
     end
   end
 
@@ -26,7 +26,7 @@ class OrganizationsController < ApplicationController
       @user.organizations.create!(org_params)
       json_response(@user.organizations, :created)
     else
-      render json: { message: 'Authentication failed'}
+      render status: 401, json: { message: 'Authentication failed'}
     end
   end
 
@@ -38,7 +38,7 @@ class OrganizationsController < ApplicationController
         render status: 200, json: @user
       end
     else
-      render json: { message: 'Authentication failed'}
+      render status: 401, json: { message: 'Authentication failed'}
     end
   end
 
@@ -49,7 +49,7 @@ class OrganizationsController < ApplicationController
         render status: 200, json: { message: "Organization deleted sucessfully"}
       end
     else
-      render json: { message: 'Authentication failed'}
+      render status: 401, json: { message: 'Authentication failed'}
     end
   end
 

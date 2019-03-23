@@ -5,7 +5,7 @@ class UsersController < ApplicationController
       @users = User.all
       json_response(@users)
     else
-      render json: { message: 'Authentication failed'}
+      render status: 401, json: { message: 'Authentication failed'}
     end
   end
 
