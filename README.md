@@ -10,10 +10,26 @@ It is worth noting that this project was created to offer basic persistence to a
 
 ## Usage
 
+### Non-docker
+
+1. Ensure system has postgres installed and configured.
+2. Clone repo
+3. Create env file: ```cd auxilio-api-server && touch config/local_env.yml```
+4. Create db encryption key: ```echo "DB_COL_ENCRYPTED_KEY: 'someSuperSecretKeyThatIsMostDefinitelyAtLeast32bytesInTotalLength'" >> config/local_env.yml```
+5. Create db encryption salt: ```echo "DB_COL_ENCRYPTED_SALT: 'someSaltySecret'" >> config/local_env.yml```
+6. Run: ```rails db:create db:migrate```
+7. Run: ```rails s```
+
+
+### Docker
+
 1. Ensure [docker](https://docs.docker.com/install/) and [docker-compose](https://docs.docker.com/compose/install/) is installed on your system.
 2. clone this repo and ```cd``` into it.
-3. Run ```docker-compose up```. Docker should start downloading the necessary images and start building your local image.
-4. Open a new terminal window or tab (in the same folder) and run ```docker-compose run web rake db:create db:migrate```
-5. The container should be setup to respond to api calls made to http://localhost:3000. Ensure the 'const link' in [auxilioServerApi.js](https://github.com/entegral/auxilio/blob/master/src/apis/auxilioServerApi.js) is pointing to this address.
-6. This is an alpha build and this container SHOULD BE USED FOR DEVELOPMENT ONLY, NOT PRODUCTION. Do not store personally identifiable information on it.
+3. Create env file: ```touch config/local_env.yml```
+4. Create db encryption key: ```echo "DB_COL_ENCRYPTED_KEY: 'someSuperSecretKeyThatIsMostDefinitelyAtLeast32bytesInTotalLength'" >> config/local_env.yml```
+5. Create db encryption salt: ```echo "DB_COL_ENCRYPTED_SALT: 'someSaltySecret'" >> config/local_env.yml```
+6. Run ```docker-compose up```. Docker should start downloading the necessary images and start building your local image.
+7. Open a new terminal window or tab (in the same folder) and run ```docker-compose run web rake db:create db:migrate```
+8. The container should be setup to respond to api calls made to http://localhost:3000. Ensure the 'const link' in [auxilioServerApi.js](https://github.com/entegral/auxilio/blob/master/src/apis/auxilioServerApi.js) is pointing to this address.
+9. This is an alpha build and this container SHOULD BE USED FOR DEVELOPMENT ONLY, NOT PRODUCTION. Do not store personally identifiable information on it.
 
