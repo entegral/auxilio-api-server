@@ -43,7 +43,6 @@ class ActionsController < ApplicationController
           @orgs = Organization.all.where(encrypted_password: nil).limit(10)
           json_response(@orgs)
         when 'updateUser'
-          @user = User.find_by!(uid: user_params[:requester_uid])
           puts '*************'
           puts 'user found:'
           puts @user
@@ -52,6 +51,13 @@ class ActionsController < ApplicationController
           if @user.update!(new_params)
             json_response(@user)
           end
+        when 'getOrgPostList'
+          @org = Organization.find_by!(uid: user_params[:org_uid])
+          @posts = []
+          @org.departments.each do |dept|
+            @posts.push(dept.posts)
+          end
+          json_response(@posts)
         else
           render json: { message: 'Unrecognized action provided', error: true }
       end
