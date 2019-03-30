@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_11_210037) do
+ActiveRecord::Schema.define(version: 2019_03_30_200629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,19 @@ ActiveRecord::Schema.define(version: 2019_03_11_210037) do
     t.index ["user_id"], name: "index_organizations_users_on_user_id"
   end
 
+  create_table "posts", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.string "uid"
+    t.string "category"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "department_id"
+    t.index ["department_id"], name: "index_posts_on_department_id"
+    t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "uid"
     t.string "first_name"
@@ -61,4 +74,6 @@ ActiveRecord::Schema.define(version: 2019_03_11_210037) do
     t.index ["job_id"], name: "index_users_on_job_id"
   end
 
+  add_foreign_key "posts", "departments"
+  add_foreign_key "posts", "users"
 end
